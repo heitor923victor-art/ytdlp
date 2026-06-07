@@ -64,9 +64,17 @@ app.get('/api/health', (req, res) => {
   let ytdlpVersion = null;
   let ffmpegVersion = null;
 
-  try {
-    ytdlpVersion = execSync('yt-dlp --version', { encoding: 'utf8', timeout: 3000 }).trim();
-  } catch { ytdlpVersion = null; }
+try {
+  ytdlpVersion = execSync(
+    '/opt/render/project/src/.venv/bin/yt-dlp --version',
+    {
+      encoding: 'utf8',
+      timeout: 3000
+    }
+  ).trim();
+} catch {
+  ytdlpVersion = null;
+}
 
   try {
     const ffOut = execSync('ffmpeg -version 2>&1', { encoding: 'utf8', timeout: 3000 });
