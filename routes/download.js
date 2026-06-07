@@ -191,7 +191,9 @@ function startDownload(sessionId, url, format, quality, resolution) {
 
   let proc;
   try {
-    proc = spawn('yt-dlp', args);
+const YTDLP_PATH = '/opt/render/project/src/.venv/bin/yt-dlp';
+
+proc = spawn(YTDLP_PATH, args);
   } catch (err) {
     updateSession(sessionId, { status: 'error' });
     sendSSE(sessionId, 'error', { message: 'yt-dlp não encontrado. Verifique a instalação.' });
